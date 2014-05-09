@@ -9,6 +9,7 @@ package org.releasemanager.api;
 import org.releasemanager.domain.Task;
 import org.releasemanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/task")
-public class Example {
+public class TaskController {
     
     @Autowired private TaskRepository taskRepository;
     
     @RequestMapping(method = {RequestMethod.GET})
-    public Iterable<Task> home() {
+    public Iterable<Task> showAll() {
         return taskRepository.findAll();
+    }
+    
+    @RequestMapping("/{taskId}")
+    public Task show(@PathVariable Long taskId) {
+        return taskRepository.findOne(taskId);
     }
     
 }
