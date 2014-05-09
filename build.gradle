@@ -35,6 +35,9 @@ dependencies {
     compile 'org.springframework.hateoas:spring-hateoas:0.9.0.RELEASE'
     compile('org.hibernate:hibernate-validator:5.1.1.Final')
     compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'net.sf.dozer:dozer:5.5.1'
+    compile 'net.sf.dozer:dozer-spring:5.5.1'
+    
     runtime("org.hsqldb:hsqldb")
     
     testCompile("junit:junit")

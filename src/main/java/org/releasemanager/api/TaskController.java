@@ -6,6 +6,7 @@
 
 package org.releasemanager.api;
 
+import java.util.List;
 import org.releasemanager.domain.Task;
 import org.releasemanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,16 @@ public class TaskController {
     
     @Autowired private TaskRepository taskRepository;
     
+    @Autowired private TaskResourceAssembler taskResourceAssembler;
+    
     @RequestMapping(method = {RequestMethod.GET})
-    public Iterable<Task> showAll() {
-        return taskRepository.findAll();
+    public List<TaskResource> showAll() {
+        return taskResourceAssembler.toResources(taskRepository.findAll());
     }
     
     @RequestMapping("/{taskId}")
-    public Task show(@PathVariable Long taskId) {
-        return taskRepository.findOne(taskId);
+    public TaskResource show(@PathVariable Long taskId) {
+        return taskResourceAssembler.toResource(taskRepository.findOne(taskId));
     }
     
 }
