@@ -15,4 +15,11 @@ target
 .classpath
 .settings
 .checkstyle
+.project
+
+# gradle specific things
+/bin/
+/.nb-gradle/private/
+build
+/.gradle/
 
