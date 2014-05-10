@@ -23,6 +23,24 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    integrationTest
+}
+
+httpPort = 8080
+stopPort = 9451
+stopKey = 'foo'
+
+[jettyRun, jettyRunWar]*.daemon = true
+
+task intTest(type:Test, dependsOn:jettyRun) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    jettyStop.execute()
+}
+
+check.dependsOn intTest
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
@@ -42,8 +60,11 @@ dependencies {
     
     testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+
+    integrationTestCompile configurations.testCompile
+    integrationTestRuntime configurations.testRuntime
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.12'
+    gradleVersion = '1.11'
 }
