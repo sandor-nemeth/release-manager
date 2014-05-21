@@ -72,6 +72,9 @@ dependencies {
     compile 'joda-time:joda-time:2.3'
     compile 'joda-time:joda-time-hibernate:1.3'
 
+    // liquibase
+    compile 'org.liquibase:liquibase-core'
+
     // other
     providedCompile 'org.projectlombok:lombok:1.12.6'
 
